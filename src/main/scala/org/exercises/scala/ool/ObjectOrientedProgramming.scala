@@ -245,22 +245,37 @@ object ObjectOrientedProgramming {
     MyAssertions.myAssert2Arg(rational1, rational2, new Rational(-2, 8), iRationalGen.-, "iRationalGen.-")
     MyAssertions.myAssert2Arg(rational1, rational2, new Rational(3, 8), iRationalGen.*, "iRationalGen.*")
     MyAssertions.myAssert2Arg(rational1, rational2, new Rational(4, 6), iRationalGen./, "iRationalGen./")
-    try{
-      throw new UnimplementedCaseException(this, "testing exception for varargs (repeated parameters _*)", "obj1", "obj2", "obj3")
-    } catch {
-      case e: UnimplementedCaseException => println(s"#1 ${e.getMessage}")
+    def testingBadBehaviour(): Unit = {
+      try{
+        throw new UnimplementedCaseException(this, "testing exception for varargs (repeated parameters _*)", "obj1", "obj2", "obj3")
+      } catch {
+        case e: UnimplementedCaseException => println(s"#1 ${e.getMessage}")
+      }
+      try{
+        val irationalImplObj1 = new Rational(1, 2)
+        val irationalImplObj2 = new RationalAbstraction(1, 2)
+        val irationalImplObjResult = iRational.constructorImpl(1, 2, irationalImplObj1, irationalImplObj2)
+        val exceptionMsgPt1 = s"Should throw exception."
+        val exceptionMsgPt2 = s"Method iRational.constructorImpl should not match any case to 2 different implementations of IRational trait."
+        val exceptionMsgPt3 = s"irationalImplObj1: $irationalImplObj1, irationalImplObj2: $irationalImplObj2, irationalImplObjResult: $irationalImplObjResult."
+        val exceptionMsg = s"$exceptionMsgPt1 $exceptionMsgPt2 $exceptionMsgPt3"
+        throw new UnimplementedCaseException(this, "test", exceptionMsg)
+      } catch {
+        case e: MixingIRationalImplementationException => println(s"#2 ${e.getMessage}")
+      }
+      try{
+        val irationalImplObj1 = new Rational(1, 2)
+        val irationalImplObj2 = new RationalAbstraction(1, 2)
+        val irationalImplObjResult = iRational.constructorImpl(1, 2, irationalImplObj2, irationalImplObj1)
+        val exceptionMsgPt1 = s"Should throw exception."
+        val exceptionMsgPt2 = s"Method iRational.constructorImpl should not match any case to 2 different implementations of IRational trait."
+        val exceptionMsgPt3 = s"irationalImplObj2: $irationalImplObj2, irationalImplObj1: $irationalImplObj1, irationalImplObjResult: $irationalImplObjResult."
+        val exceptionMsg = s"$exceptionMsgPt1 $exceptionMsgPt2 $exceptionMsgPt3"
+        throw new UnimplementedCaseException(this, "test", exceptionMsg)
+      } catch {
+        case e: MixingIRationalImplementationException => println(s"#3 ${e.getMessage}")
+      }
     }
-    try{
-      val irationalImplObj1 = new Rational(1, 2)
-      val irationalImplObj2 = new RationalAbstraction(1, 2)
-      val irationalImplObjResult = iRational.constructorImpl(1, 2, irationalImplObj1, irationalImplObj2)
-      val exceptionMsgPt1 = s"Should throw exception."
-      val exceptionMsgPt2 = s"Method iRational.constructorImpl should not match any case to 2 different implementations of IRational trait."
-      val exceptionMsgPt3 = s"irationalImplObj1: $irationalImplObj1, irationalImplObj2: $irationalImplObj2, irationalImplObjResult: $irationalImplObjResult."
-      val exceptionMsg = s"$exceptionMsgPt1 $exceptionMsgPt2 $exceptionMsgPt3"
-      throw new UnimplementedCaseException(this, "test", exceptionMsg)
-    } catch {
-      case e: UnimplementedCaseException => println(s"#2 ${e.getMessage}")
-    }
+    testingBadBehaviour()
   }
 }

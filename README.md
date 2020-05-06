@@ -1,5 +1,5 @@
 # LearnScalaMavenBasics
-Scala learning project. Consists of multiple tutorial. Expanded on by Jacek Oleś.
+Scala learning project. Consists of multiple tutorials. Expanded on by Jacek Oleś.
 
 ## Tech Stack
 1. Java 11

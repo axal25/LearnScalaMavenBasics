@@ -105,17 +105,25 @@ object iRational {
 
   def constructorImpl(numerator: Int, denominator: Int, first: IRational, irationals: IRational*): IRational = {
     println(s"first class: ${first.getClass.getSimpleName}, irationals class: ${irationals.getClass.getSimpleName}")
-    first match {
-      case rational: Rational => irationals match {
-        case rationals: Seq[Rational] => new Rational(numerator, denominator)
-        case _ => throw new UnimplementedCaseException(this, "constructorImpl", first +: irationals: _*)
+
+    @scala.annotation.tailrec
+    def isSeqElementsOfTypeSameAsFirst(first: Any, irationals: Any*): Boolean = irationals match {
+      case Seq() => true
+      case Seq(head, tail@_*) => {
+        if (first.getClass == head.getClass) isSeqElementsOfTypeSameAsFirst(first, tail: _*)
+        else false
       }
-      case abstraction: RationalAbstraction => irationals match {
-        case abstractions: Seq[RationalAbstraction] => new RationalAbstraction(numerator, denominator)
-        case _ => throw new UnimplementedCaseException(this, "constructorImpl", first +: irationals: _*)
-      }
-      case _ => throw new UnimplementedCaseException(this, "constructorImpl", first +: irationals: _*)
+      case _ => false
     }
+
+    if (isSeqElementsOfTypeSameAsFirst(first, irationals: _*)) {
+      first match {
+        case rational: Rational => new Rational(numerator, denominator)
+        case abstraction: RationalAbstraction => new RationalAbstraction(numerator, denominator)
+        case _ => throw new UnimplementedCaseException(this, "constructorImpl", first +: irationals: _*)
+      }
+    }
+    else throw new MixingIRationalImplementationException(first, irationals: _*)
   }
 
   def greatestCommonDivisor(first: Int, second: Int): Int = {
