@@ -16,7 +16,11 @@ class AppTest {
       def shouldBeTest(): Unit = {
         1 + 2 shouldBe 3
       }
+
+      shouldBeTest()
     }
+
+    new ShouldBeTester
   }
 
   //    @Test

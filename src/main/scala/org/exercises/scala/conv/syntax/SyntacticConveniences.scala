@@ -29,8 +29,8 @@ object SyntacticConveniences {
     def helloUpperCase(name: String): String = s"Hello, ${name.toUpperCase}!"
 
     println("\nString interpolation")
-    MyAssertions.myAssert("Jacek Oleś", "Hello, Jacek Oleś!", genHello, "hello")
-    MyAssertions.myAssert("Jacek Oleś", "Hello, JACEK OLEŚ!", genHelloUpperCase, "helloUpperCase")
+    MyAssertions.myAssert1Arg("Jacek Oleś", "Hello, Jacek Oleś!", genHello, "hello")
+    MyAssertions.myAssert1Arg("Jacek Oleś", "Hello, JACEK OLEŚ!", genHelloUpperCase, "helloUpperCase")
   }
 
   def tuples(): Unit = {
@@ -45,10 +45,10 @@ object SyntacticConveniences {
     }
 
     println("\nTuples")
-    MyAssertions.myAssert(tupleOf3(42, "foo", 1.5), (42, "foo", 1.5), x => x, "x => x")
-    MyAssertions.myAssert(tupleOf3(0, "bar", 3.5), (0, "bar", 3.5), x => x, "x => x")
-    MyAssertions.myAssert(tupleOf3(42, "foo", 1.5), (43, "foo +1", 5.0), tupleOf3Transform1, "tupleOf3Transform1")
-    MyAssertions.myAssert(tupleOf3(42, "foo", 1.5), (44, "foo +2", 6.0), tupleOf3Transform2, "tupleOf3Transform2")
+    MyAssertions.myAssert1Arg(tupleOf3(42, "foo", 1.5), (42, "foo", 1.5), x => x, "x => x")
+    MyAssertions.myAssert1Arg(tupleOf3(0, "bar", 3.5), (0, "bar", 3.5), x => x, "x => x")
+    MyAssertions.myAssert1Arg(tupleOf3(42, "foo", 1.5), (43, "foo +1", 5.0), tupleOf3Transform1, "tupleOf3Transform1")
+    MyAssertions.myAssert1Arg(tupleOf3(42, "foo", 1.5), (44, "foo +2", 6.0), tupleOf3Transform2, "tupleOf3Transform2")
   }
 
   def functionsAsObjects(): Unit = {
@@ -142,14 +142,14 @@ object SyntacticConveniences {
       case _ => new UnimplementedCaseException(this, "map1", obj)
     }
 
-    MyAssertions.myAssert(list, expectedMappedList, map1, "map1{ list.map(element => element + 1) }")
+    MyAssertions.myAssert1Arg(list, expectedMappedList, map1, "map1{ list.map(element => element + 1) }")
 
     def map2(obj: Any): Any = obj match {
       case list: List[Int] => for (element <- list) yield element + 1
       case _ => new UnimplementedCaseException(this, "map2", obj)
     }
 
-    MyAssertions.myAssert(list, expectedMappedList, map1, "map1{ for(element <- list) yield element + 1 }")
+    MyAssertions.myAssert1Arg(list, expectedMappedList, map1, "map1{ for(element <- list) yield element + 1 }")
 
     println("\nFILTER")
     val expectedFilteredList = List(1, 3, 5, 7)
@@ -159,14 +159,14 @@ object SyntacticConveniences {
       case _ => new UnimplementedCaseException(this, "filter1", obj)
     }
 
-    MyAssertions.myAssert(list, expectedFilteredList, filter1, "filter1{ list.filter(element => element % 2 == 0).map(element => element + 1) }")
+    MyAssertions.myAssert1Arg(list, expectedFilteredList, filter1, "filter1{ list.filter(element => element % 2 == 0).map(element => element + 1) }")
 
     def filter2(obj: Any): Any = obj match {
       case list: List[Int] => for (element <- list if element % 2 == 0) yield element + 1
       case _ => new UnimplementedCaseException(this, "filter2", obj)
     }
 
-    MyAssertions.myAssert(list, expectedFilteredList, filter2, "filter2{ for(element <- list if element % 2 == 0) yield element + 1 }")
+    MyAssertions.myAssert1Arg(list, expectedFilteredList, filter2, "filter2{ for(element <- list if element % 2 == 0) yield element + 1 }")
 
     println("\nFLAT MAP")
     val anotherList = List("zero", "one", "two")

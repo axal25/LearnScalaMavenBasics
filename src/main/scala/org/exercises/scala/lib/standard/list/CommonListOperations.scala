@@ -18,7 +18,7 @@ object CommonListOperations {
     val assertion1 = s"${list1}.map(x => x+1) == ${expectedList1}"
     assert(list1.map(x => x + 1) == expectedList1, assertion1)
     println(assertion1)
-    MyAssertions.myAssert(list1, expectedList1, ListsImpl.map, "ListsImpl.map")
+    MyAssertions.myAssert1Arg(list1, expectedList1, ListsImpl.map, "ListsImpl.map")
   }
 
   def listFilter(): Unit = {
@@ -28,7 +28,7 @@ object CommonListOperations {
     val assertion1 = s"${list1}.filter(x => x % 2 == 0) == ${expectedList1}"
     assert(list1.filter(x => x % 2 == 0) == expectedList1, assertion1)
     println(assertion1)
-    MyAssertions.myAssert(list1, expectedList1, ListsImpl.filter, "ListsImpl.filter")
+    MyAssertions.myAssert1Arg(list1, expectedList1, ListsImpl.filter, "ListsImpl.filter")
   }
 
   def listFlatMap(): Unit = {
@@ -49,8 +49,8 @@ object CommonListOperations {
     assert(list1.flatMap(int => List(int, int + 1, int + 2)) == expectedList2, assertion2 + actualOutcome1)
     println(assertion2)
 
-    MyAssertions.myAssert(list1, expectedList1, ListsImpl.flatMap, "FlatMapImpl.flatMap")
-    MyAssertions.myAssert(list1, expectedList2, ListsImpl.flatMap, "FlatMapImpl.flatMap")
+    MyAssertions.myAssert1Arg(list1, expectedList1, ListsImpl.flatMap, "FlatMapImpl.flatMap")
+    MyAssertions.myAssert1Arg(list1, expectedList2, ListsImpl.flatMap, "FlatMapImpl.flatMap")
   }
 
   object ListsImpl {

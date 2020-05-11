@@ -23,28 +23,34 @@ object PatternMatching {
   }
 
   def caseClassDecomposition(): Unit = {
-    case class Person1(name: String, age: Int)
-    val bob = Person1("Bob", 43)
-    assert(Person1("Bob", 43) == new Person1("Bob", 43), "Person(\"Bob\", 43) == new Person(\"Bob\", 43)")
-    assert(Person1("Bob", 43) == Person1.apply("Bob", 43), "Person(\"Bob\", 43) == Person.apply(\"Bob\", 43)")
-    val angela = Person1("Angela", 19)
+    case class Person(name: String, age: Int) {
+      def this(name: String) = this(name, -1)
+      def this() = this(null)
+    }
 
-    def personGreeting(p: Person1): String = p match {
-      case Person1(n, a) => s"Hi, my name is $n and I am $a years old."
+    val bob = Person("Bob", 43)
+    val angela = Person("Angela", 19)
+    val bob2 = new Person("Bob 2")
+    val bob3 = new Person()
+    assert(Person("Bob", 43) == new Person("Bob", 43), "Person(\"Bob\", 43) == new Person(\"Bob\", 43)")
+    assert(Person("Bob", 43) == Person.apply("Bob", 43), "Person(\"Bob\", 43) == Person.apply(\"Bob\", 43)")
+    assert(angela == new Person("Angela", 19), "angela == new Person(\"Angela\", 19)")
+    assert(bob2 == new Person("Bob 2", -1), "bob2 == new Person(\"Bob2\", -1)")
+    assert(bob3 == new Person(null, -1), "bob3 == new Person(null, -1)")
+
+    def personGreeting(p: Person): String = p match {
+      case Person(n, a) => s"Hi, my name is $n and I am $a years old."
       case _ => "I don't really know what to say..."
     }
-    //todo
-    //    generic?
-    //    case class Person2(name2: String, age2: Int) {}
-    //    val bob2 = Person2("Bob 2", 432)
-    //
-    //    case class Person3(name3: String)
-    //    val bob3 = Person3("Bob3")
-    //
+
+    assert(personGreeting(bob) == "Hi, my name is Bob and I am 43 years old.", "personGreeting(bob) == \"Hi, my name is Bob and I am 43 years old.\"")
     println(personGreeting(bob))
+    assert(personGreeting(angela) == "Hi, my name is Angela and I am 19 years old.", "personGreeting(angela) == \"Hi, my name is Angela and I am 19 years old.\"")
     println(personGreeting(angela))
-    //    println(personGreeting(bob2))
-    //    println(personGreeting(bob3))
+    assert(personGreeting(bob2) == "Hi, my name is Bob 2 and I am -1 years old.", "personGreeting(bob2) == \"Hi, my name is Bob 2 and I am -1 years old.\"")
+    println(personGreeting(bob2))
+    assert(personGreeting(bob3) == "Hi, my name is null and I am -1 years old.", "personGreeting(bob3) == \"Hi, my name is null and I am -1 years old.\"")
+    println(personGreeting(bob3))
   }
 
   def deconstructingTuples(): Unit = {

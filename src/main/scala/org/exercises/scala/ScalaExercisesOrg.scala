@@ -8,6 +8,7 @@ import org.exercises.scala.func.order.higher.HigherOrderFunctions
 import org.exercises.scala.info.structure.StructuringInformation
 import org.exercises.scala.lib.standard.StandardLibrary
 import org.exercises.scala.ool.ObjectOrientedProgramming
+import org.exercises.scala.prog.imper.ImperativeProgramming
 import org.exercises.scala.recursion.tail.TailRecursion
 import org.exercises.scala.terms.types.TermsAndTypes
 
@@ -27,6 +28,7 @@ object ScalaExercisesOrg {
     StandardLibrary.main()
     SyntacticConveniences.main()
     ObjectOrientedProgramming.main()
+    ImperativeProgramming.main()
   }
 
 }

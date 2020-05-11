@@ -23,40 +23,40 @@ object Optionals {
   def returningOptions(): Unit = {
     println("\nReturning Option(s)")
 
-    MyAssertions.myAssert(1.0, Some(1.0), sqrtGeneralization, "sqrt")
-    MyAssertions.myAssert(1, Some(1), sqrtGeneralization, "sqrt")
+    MyAssertions.myAssert1Arg(1.0, Some(1.0), sqrtGeneralization, "sqrt")
+    MyAssertions.myAssert1Arg(1, Some(1), sqrtGeneralization, "sqrt")
 
-    MyAssertions.myAssert(2.0, Some(expectedSqrt2Aprox), sqrtGeneralization, "sqrt")
-    MyAssertions.myAssert(2, Some(expectedSqrt2Aprox), sqrtGeneralization, "sqrt")
+    MyAssertions.myAssert1Arg(2.0, Some(expectedSqrt2Aprox), sqrtGeneralization, "sqrt")
+    MyAssertions.myAssert1Arg(2, Some(expectedSqrt2Aprox), sqrtGeneralization, "sqrt")
 
-    MyAssertions.myAssert(3.0, Some(expectedSqrt3Aprox), sqrtGeneralization, "sqrt")
-    MyAssertions.myAssert(3, Some(expectedSqrt3Aprox), sqrtGeneralization, "sqrt")
+    MyAssertions.myAssert1Arg(3.0, Some(expectedSqrt3Aprox), sqrtGeneralization, "sqrt")
+    MyAssertions.myAssert1Arg(3, Some(expectedSqrt3Aprox), sqrtGeneralization, "sqrt")
 
-    MyAssertions.myAssert(-1.0, None, sqrtGeneralization, "sqrt")
-    MyAssertions.myAssert(-2.0, None, sqrtGeneralization, "sqrt")
-    MyAssertions.myAssert(-3.0, None, sqrtGeneralization, "sqrt")
+    MyAssertions.myAssert1Arg(-1.0, None, sqrtGeneralization, "sqrt")
+    MyAssertions.myAssert1Arg(-2.0, None, sqrtGeneralization, "sqrt")
+    MyAssertions.myAssert1Arg(-3.0, None, sqrtGeneralization, "sqrt")
   }
 
   def matchingOptions(): Unit = {
     println("\nMatching Option(s)")
 
-    MyAssertions.myAssert(sqrt(2), s"Got Some: ${expectedSqrt2Aprox}", matchOption, "matchOption")
-    MyAssertions.myAssert(sqrt(-2), s"Got None", matchOption, "matchOption")
+    MyAssertions.myAssert1Arg(sqrt(2), s"Got Some: ${expectedSqrt2Aprox}", matchOption, "matchOption")
+    MyAssertions.myAssert1Arg(sqrt(-2), s"Got None", matchOption, "matchOption")
 
-    MyAssertions.myAssert(sqrt(3), s"Got Some: ${expectedSqrt3Aprox}", matchOption, "matchOption")
-    MyAssertions.myAssert(sqrt(-3), s"Got None", matchOption, "matchOption")
+    MyAssertions.myAssert1Arg(sqrt(3), s"Got Some: ${expectedSqrt3Aprox}", matchOption, "matchOption")
+    MyAssertions.myAssert1Arg(sqrt(-3), s"Got None", matchOption, "matchOption")
   }
 
   def manipulatingOptions(): Unit = {
     println("\nManipulating Option(s)")
 
-    MyAssertions.myAssert(sqrt(2), expectedSqrt2Aprox + 1, manipulateOption, "manipulateOption")
-    MyAssertions.myAssert(sqrt(-2), Nil, manipulateOption, "manipulateOption")
-    MyAssertions.myAssert(Option(extractValue(sqrt(2)).toString), s"${expectedSqrt2Aprox.toString} 1", manipulateOption, "manipulateOption")
+    MyAssertions.myAssert1Arg(sqrt(2), expectedSqrt2Aprox + 1, manipulateOption, "manipulateOption")
+    MyAssertions.myAssert1Arg(sqrt(-2), Nil, manipulateOption, "manipulateOption")
+    MyAssertions.myAssert1Arg(Option(extractValue(sqrt(2)).toString), s"${expectedSqrt2Aprox.toString} 1", manipulateOption, "manipulateOption")
 
-    MyAssertions.myAssert(sqrt(3), expectedSqrt3Aprox + 1, manipulateOption, "manipulateOption")
-    MyAssertions.myAssert(sqrt(-3), Nil, manipulateOption, "manipulateOption")
-    MyAssertions.myAssert(Option(extractValue(sqrt(3)).toString), s"${expectedSqrt3Aprox.toString} 1", manipulateOption, "manipulateOption")
+    MyAssertions.myAssert1Arg(sqrt(3), expectedSqrt3Aprox + 1, manipulateOption, "manipulateOption")
+    MyAssertions.myAssert1Arg(sqrt(-3), Nil, manipulateOption, "manipulateOption")
+    MyAssertions.myAssert1Arg(Option(extractValue(sqrt(3)).toString), s"${expectedSqrt3Aprox.toString} 1", manipulateOption, "manipulateOption")
   }
 
   def commonOptionOperations(): Unit = {
@@ -68,9 +68,9 @@ object Optionals {
     println("\tcase None => ?Nil?")
     println("} => Option[T] => Some(transform(t)) | None")
     println("transform: (int: Int => int + 1)")
-    MyAssertions.myAssert(Some(1), Some(2), OptionsImpl.map, "OptionsImpl.map")
-    MyAssertions.myAssert(Some(2), Some(3), OptionsImpl.map, "OptionsImpl.map")
-    MyAssertions.myAssert(None, None, OptionsImpl.map, "OptionsImpl.map")
+    MyAssertions.myAssert1Arg(Some(1), Some(2), OptionsImpl.map, "OptionsImpl.map")
+    MyAssertions.myAssert1Arg(Some(2), Some(3), OptionsImpl.map, "OptionsImpl.map")
+    MyAssertions.myAssert1Arg(None, None, OptionsImpl.map, "OptionsImpl.map")
 
     println("\nFilter - filters:")
     println("val ot: Option[T] = {")
@@ -79,9 +79,9 @@ object Optionals {
     println("\telse None")
     println("}")
     println("condition: (int: Int => int % 2 == 0)")
-    MyAssertions.myAssert(Some(1), None, OptionsImpl.filter, "OptionsImpl.filter")
-    MyAssertions.myAssert(Some(2), Some(2), OptionsImpl.filter, "OptionsImpl.filter")
-    MyAssertions.myAssert(None, None, OptionsImpl.filter, "OptionsImpl.filter")
+    MyAssertions.myAssert1Arg(Some(1), None, OptionsImpl.filter, "OptionsImpl.filter")
+    MyAssertions.myAssert1Arg(Some(2), Some(2), OptionsImpl.filter, "OptionsImpl.filter")
+    MyAssertions.myAssert1Arg(None, None, OptionsImpl.filter, "OptionsImpl.filter")
 
     println("\nFlatMap - transforms:")
     println("val ot: Option[T] = match ot {")
@@ -89,9 +89,9 @@ object Optionals {
     println("\tcase None => None")
     println("} => Option[T] => Some(transform(t)) | None")
     println("transform: (int: Int => int + 5)")
-    MyAssertions.myAssert(Some(1), Some(6), OptionsImpl.flatMap, "OptionsImpl.flatMap")
-    MyAssertions.myAssert(Some(2), Some(7), OptionsImpl.flatMap, "OptionsImpl.flatMap")
-    MyAssertions.myAssert(None, None, OptionsImpl.flatMap, "OptionsImpl.flatMap")
+    MyAssertions.myAssert1Arg(Some(1), Some(6), OptionsImpl.flatMap, "OptionsImpl.flatMap")
+    MyAssertions.myAssert1Arg(Some(2), Some(7), OptionsImpl.flatMap, "OptionsImpl.flatMap")
+    MyAssertions.myAssert1Arg(None, None, OptionsImpl.flatMap, "OptionsImpl.flatMap")
   }
 
   object OptionsImpl {

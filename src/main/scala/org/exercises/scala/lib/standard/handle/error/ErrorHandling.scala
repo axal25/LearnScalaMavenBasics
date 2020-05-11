@@ -25,33 +25,33 @@ object ErrorHandling {
     println("Try[A] can be either Success[A] or Failure")
     println("Failure is improvement over None because it provides a reason in a form of Throwable type")
 
-    MyAssertions.myAssert(2, Success(expectedSqrt2Aprox), sqrt, "sqrt")
-    MyAssertions.myAssert(-2, Failure(new NegativeNumberToSqrtException(-2.0)), sqrt, "sqrt")
+    MyAssertions.myAssert1Arg(2, Success(expectedSqrt2Aprox), sqrt, "sqrt")
+    MyAssertions.myAssert1Arg(-2, Failure(new NegativeNumberToSqrtException(-2.0)), sqrt, "sqrt")
 
-    MyAssertions.myAssert(3, Success(expectedSqrt3Aprox), sqrt, "sqrt")
-    MyAssertions.myAssert(-3, Failure(new NegativeNumberToSqrtException(-3.0)), sqrt, "sqrt")
+    MyAssertions.myAssert1Arg(3, Success(expectedSqrt3Aprox), sqrt, "sqrt")
+    MyAssertions.myAssert1Arg(-3, Failure(new NegativeNumberToSqrtException(-3.0)), sqrt, "sqrt")
   }
 
   def manipulatingMatchingTries(): Unit = {
     println("\nManipulating (matching & common functions) tries")
 
-    MyAssertions.myAssert(sqrt(2), Success(expectedSqrt2Aprox + 1), TriesImpl.map, "TriesImpl.map")
-    MyAssertions.myAssert(sqrt(-2), Failure(new NegativeNumberToSqrtException(-2.0)), TriesImpl.map, "TriesImpl.map")
+    MyAssertions.myAssert1Arg(sqrt(2), Success(expectedSqrt2Aprox + 1), TriesImpl.map, "TriesImpl.map")
+    MyAssertions.myAssert1Arg(sqrt(-2), Failure(new NegativeNumberToSqrtException(-2.0)), TriesImpl.map, "TriesImpl.map")
 
-    MyAssertions.myAssert(Success(2), Success(2), TriesImpl.filter, "TriesImpl.filter")
-    MyAssertions.myAssert(sqrt(2), Failure(new NoSuchElementException(s"Predicate does not hold for $expectedSqrt2Aprox")), TriesImpl.filter, "TriesImpl.filter")
+    MyAssertions.myAssert1Arg(Success(2), Success(2), TriesImpl.filter, "TriesImpl.filter")
+    MyAssertions.myAssert1Arg(sqrt(2), Failure(new NoSuchElementException(s"Predicate does not hold for $expectedSqrt2Aprox")), TriesImpl.filter, "TriesImpl.filter")
 
-    MyAssertions.myAssert(sqrt(2), Success(expectedSqrt2Aprox + 5), TriesImpl.flatMap, "TriesImpl.flatMap")
-    MyAssertions.myAssert(sqrt(-2), Failure(new NegativeNumberToSqrtException(-2.0)), TriesImpl.flatMap, "TriesImpl.flatMap")
+    MyAssertions.myAssert1Arg(sqrt(2), Success(expectedSqrt2Aprox + 5), TriesImpl.flatMap, "TriesImpl.flatMap")
+    MyAssertions.myAssert1Arg(sqrt(-2), Failure(new NegativeNumberToSqrtException(-2.0)), TriesImpl.flatMap, "TriesImpl.flatMap")
 
-    MyAssertions.myAssert(sqrt(3), Success(expectedSqrt3Aprox + 1), TriesImpl.map, "TriesImpl.map")
-    MyAssertions.myAssert(sqrt(-3), Failure(new NegativeNumberToSqrtException(-3.0)), TriesImpl.map, "TriesImpl.map")
+    MyAssertions.myAssert1Arg(sqrt(3), Success(expectedSqrt3Aprox + 1), TriesImpl.map, "TriesImpl.map")
+    MyAssertions.myAssert1Arg(sqrt(-3), Failure(new NegativeNumberToSqrtException(-3.0)), TriesImpl.map, "TriesImpl.map")
 
-    MyAssertions.myAssert(Success(4), Success(4), TriesImpl.filter, "TriesImpl.filter")
-    MyAssertions.myAssert(sqrt(3), Failure(new NoSuchElementException(s"Predicate does not hold for $expectedSqrt3Aprox")), TriesImpl.filter, "TriesImpl.filter")
+    MyAssertions.myAssert1Arg(Success(4), Success(4), TriesImpl.filter, "TriesImpl.filter")
+    MyAssertions.myAssert1Arg(sqrt(3), Failure(new NoSuchElementException(s"Predicate does not hold for $expectedSqrt3Aprox")), TriesImpl.filter, "TriesImpl.filter")
 
-    MyAssertions.myAssert(sqrt(3), Success(expectedSqrt3Aprox + 5), TriesImpl.flatMap, "TriesImpl.flatMap")
-    MyAssertions.myAssert(sqrt(-3), Failure(new NegativeNumberToSqrtException(-3.0)), TriesImpl.flatMap, "TriesImpl.flatMap")
+    MyAssertions.myAssert1Arg(sqrt(3), Success(expectedSqrt3Aprox + 5), TriesImpl.flatMap, "TriesImpl.flatMap")
+    MyAssertions.myAssert1Arg(sqrt(-3), Failure(new NegativeNumberToSqrtException(-3.0)), TriesImpl.flatMap, "TriesImpl.flatMap")
   }
 
   def eithers(): Unit = {
@@ -60,11 +60,11 @@ object ErrorHandling {
     println("Unlike Try[T] it is possible to choose different type than Throwable to represent exception")
     println("Either transformation resulting in exception does not convert value into Failure")
 
-    MyAssertions.myAssert(2, Right(expectedSqrt2Aprox), sqrtEither, "sqrtEither")
-    MyAssertions.myAssert(-2, Left(new NegativeNumberToSqrtException(-2.0).getMessage), sqrtEither, "sqrtEither")
+    MyAssertions.myAssert1Arg(2, Right(expectedSqrt2Aprox), sqrtEither, "sqrtEither")
+    MyAssertions.myAssert1Arg(-2, Left(new NegativeNumberToSqrtException(-2.0).getMessage), sqrtEither, "sqrtEither")
 
-    MyAssertions.myAssert(3, Right(expectedSqrt3Aprox), sqrtEither, "sqrtEither")
-    MyAssertions.myAssert(-3, Left(new NegativeNumberToSqrtException(-3.0).getMessage), sqrtEither, "sqrtEither")
+    MyAssertions.myAssert1Arg(3, Right(expectedSqrt3Aprox), sqrtEither, "sqrtEither")
+    MyAssertions.myAssert1Arg(-3, Left(new NegativeNumberToSqrtException(-3.0).getMessage), sqrtEither, "sqrtEither")
   }
 
   def manipulatingMatchingEithers(): Unit = {
@@ -73,23 +73,23 @@ object ErrorHandling {
     assert(Right(1).map(x => x + 1) == Right(2), "Right(1).map(x => x + 1) == Right(2)")
     assert(Left("unfortunate case").map((x: Int) => x + 1) == Left("unfortunate case"), "Left(\"unfortunate case\").map((x: Int) => x + 1) == Left(\"unfortunate case\")")
 
-    MyAssertions.myAssert(sqrt(2), Right(expectedSqrt2Aprox + 1), EitherImpl.map, "EitherImpl.map")
-    MyAssertions.myAssert(sqrt(-2), Left(new NegativeNumberToSqrtException(-2.0).getMessage), EitherImpl.map, "EitherImpl.map")
+    MyAssertions.myAssert1Arg(sqrt(2), Right(expectedSqrt2Aprox + 1), EitherImpl.map, "EitherImpl.map")
+    MyAssertions.myAssert1Arg(sqrt(-2), Left(new NegativeNumberToSqrtException(-2.0).getMessage), EitherImpl.map, "EitherImpl.map")
 
-    MyAssertions.myAssert(Success(2), Right(2), EitherImpl.filter, "EitherImpl.filter")
-    MyAssertions.myAssert(sqrt(2), Left(new NoSuchElementException(s"Predicate does not hold for $expectedSqrt2Aprox").getMessage), EitherImpl.filter, "EitherImpl.filter")
+    MyAssertions.myAssert1Arg(Success(2), Right(2), EitherImpl.filter, "EitherImpl.filter")
+    MyAssertions.myAssert1Arg(sqrt(2), Left(new NoSuchElementException(s"Predicate does not hold for $expectedSqrt2Aprox").getMessage), EitherImpl.filter, "EitherImpl.filter")
 
-    MyAssertions.myAssert(sqrt(2), Right(expectedSqrt2Aprox + 5), EitherImpl.flatMap, "EitherImpl.flatMap")
-    MyAssertions.myAssert(sqrt(-2), Left(new NegativeNumberToSqrtException(-2.0).getMessage), EitherImpl.flatMap, "EitherImpl.flatMap")
+    MyAssertions.myAssert1Arg(sqrt(2), Right(expectedSqrt2Aprox + 5), EitherImpl.flatMap, "EitherImpl.flatMap")
+    MyAssertions.myAssert1Arg(sqrt(-2), Left(new NegativeNumberToSqrtException(-2.0).getMessage), EitherImpl.flatMap, "EitherImpl.flatMap")
 
-    MyAssertions.myAssert(sqrt(3), Right(expectedSqrt3Aprox + 1), EitherImpl.map, "EitherImpl.map")
-    MyAssertions.myAssert(sqrt(-3), Left(new NegativeNumberToSqrtException(-3.0).getMessage), EitherImpl.map, "EitherImpl.map")
+    MyAssertions.myAssert1Arg(sqrt(3), Right(expectedSqrt3Aprox + 1), EitherImpl.map, "EitherImpl.map")
+    MyAssertions.myAssert1Arg(sqrt(-3), Left(new NegativeNumberToSqrtException(-3.0).getMessage), EitherImpl.map, "EitherImpl.map")
 
-    MyAssertions.myAssert(Success(4), Right(4), EitherImpl.filter, "EitherImpl.filter")
-    MyAssertions.myAssert(sqrt(3), Left(new NoSuchElementException(s"Predicate does not hold for $expectedSqrt3Aprox").getMessage), EitherImpl.filter, "EitherImpl.filter")
+    MyAssertions.myAssert1Arg(Success(4), Right(4), EitherImpl.filter, "EitherImpl.filter")
+    MyAssertions.myAssert1Arg(sqrt(3), Left(new NoSuchElementException(s"Predicate does not hold for $expectedSqrt3Aprox").getMessage), EitherImpl.filter, "EitherImpl.filter")
 
-    MyAssertions.myAssert(sqrt(3), Right(expectedSqrt3Aprox + 5), EitherImpl.flatMap, "EitherImpl.flatMap")
-    MyAssertions.myAssert(sqrt(-3), Left(new NegativeNumberToSqrtException(-3.0).getMessage), EitherImpl.flatMap, "EitherImpl.flatMap")
+    MyAssertions.myAssert1Arg(sqrt(3), Right(expectedSqrt3Aprox + 5), EitherImpl.flatMap, "EitherImpl.flatMap")
+    MyAssertions.myAssert1Arg(sqrt(-3), Left(new NegativeNumberToSqrtException(-3.0).getMessage), EitherImpl.flatMap, "EitherImpl.flatMap")
 
     println("\nEither.filterOrElse(Boolean, Left(B))")
     assert(Right(1).filterOrElse(x => x % 2 == 0, "Odd value") == Left("Odd value"), "Right(1).filterOrElse(x => x % 2 == 0, \"Odd value\") == Left(\"Odd value\")")
@@ -103,8 +103,8 @@ object ErrorHandling {
       case stringOrInt: Either[String, Int] => tripleEither(stringOrInt)
       case _ => throw new UnimplementedCaseException(this, "generalizeTripleEither", obj)
     }
-    MyAssertions.myAssert(Right(1), Right(3), generalizeTripleEither, "tripleEither")
-    MyAssertions.myAssert(Left("Not a number"), Left("Not a number"), generalizeTripleEither, "tripleEither")
+    MyAssertions.myAssert1Arg(Right(1), Right(3), generalizeTripleEither, "tripleEither")
+    MyAssertions.myAssert1Arg(Left("Not a number"), Left("Not a number"), generalizeTripleEither, "tripleEither")
   }
 
   object TriesImpl {
